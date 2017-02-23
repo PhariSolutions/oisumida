@@ -1,4 +1,4 @@
-var express = require('express');
+var express = MODULES.express;
 var router = express.Router();
 
 /* GET home page. */

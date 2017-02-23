@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
 /**
+ * Container for modules that are used throughout the project
+ */
+ 
+MODULES = {};
+
+/**
  * Module dependencies.
  */
 
@@ -20,6 +26,13 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Setup Socket.io
+ */
+
+MODULES.io = require('socket.io')(server);
+require('../routes/sockets');
 
 /**
  * Listen on provided port, on all network interfaces.
