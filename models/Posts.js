@@ -2,16 +2,19 @@
  * Mongoose model of a post:
  *
  */
-
-var postSchema = MODULES.mongoose.Schema({
-    text: String,
-    image: { type: Buffer, default: null },
-    location: {
-        'type': { type: String, enum: "Point", default: "Point" },
-        coordinates: { type: [Number],   default: [0,0] }
-    },
-    lifetime: { type: Number, min: 1, max: 86400 }
-});
-postSchema.index({ location : "2dsphere" });
-
-MODULES.mongoose.model('Post', postSchema);
+module.exports = function (mongoose) {
+    var postSchema = mongoose.Schema({
+        text: String,
+        image: { type: Buffer, default: null },
+        location: {
+            'type': { type: String, enum: "Point", default: "Point" },
+            coordinates: { type: [Number], default: [0, 0] }
+        },
+        expire: {
+            type: Date,
+            index: { expires: 0 }
+        }
+    });
+    postSchema.index({ location: "2dsphere" });
+    return mongoose.model('Post', postSchema);
+}

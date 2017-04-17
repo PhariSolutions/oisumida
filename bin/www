@@ -9,7 +9,7 @@ MODULES = {};
 /**
  * Module dependencies.
  */
-var app = require('../app');
+app = require('../app');
 var debug = require('debug')('oisumida:server');
 var http = require('http');
 
@@ -25,10 +25,20 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Setup Socket.io
+ * Database
  */
-MODULES.io = require('socket.io')(server);
+require('../routes/database');
+
+/**
+ * Sockets
+ */
+MODULES.io = require('socket.io')(server, { path: "/stream" });
 require('../routes/sockets');
+
+/**
+ * Route for retrieving images
+ */
+require('../routes/getImage');
 
 /**
  * Listen on provided port, on all network interfaces.

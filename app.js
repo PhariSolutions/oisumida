@@ -1,5 +1,5 @@
-MODULES.express = require('express');
-var express = MODULES.express;
+// MODULES.express = require('express');
+express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,13 +8,6 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 
-/*
-* Setup do mongoose, e já incluo tbm o modelo de Post
-*/
-MODULES.mongoose = require('mongoose');
-require('./models/Posts');
-MODULES.mongoose.connect('mongodb://localhost/oisumida');
-
 var app = express();
 
 // view engine setup
@@ -22,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
