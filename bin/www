@@ -32,7 +32,7 @@ require('../routes/database');
 /**
  * Sockets
  */
-MODULES.io = require('socket.io')(server, { path: "/stream" });
+MODULES.io = require('socket.io').listen(server);
 require('../routes/sockets');
 
 /**

@@ -1,0 +1,5 @@
+form(action="return sendNew()")
+  input(type="text" name="text" value="...oi sumida ;)")
+  input(type="range" name="ttl" step="15" min="5" max="720")
+  input()img
+  input(type="submit" value="Postar")

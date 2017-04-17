@@ -1,6 +1,42 @@
-body
-  padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+@import 'palette'
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One');
 
+body
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  color: $primary-text-color
+  
 a
   color: #00B7FF
+
+#mapid
+  height: 87.5vh
+  width: 100vw
+
+#navbar
+  height: 10vh
+  width: 100vw
+
+#navbar > *
+  display: inline
+  float: left
+  margin: 1vh  
+  margin-left: 0.5em
+  margin-right: 0.5em
+
+#navbar > h1
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 2em
+  margin-top: 0.5em
+
+#logo
+  height: 8vh
+  width: auto
+  float: right
+
+footer
+  height: 2.5vh
+  font-size: 0.7em
+  margin: 0
+
