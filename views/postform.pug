@@ -1,0 +1,17 @@
+#modalsubmit
+  div
+    script(src="/javascripts/form.js")
+    a(href="#close" title="Close" class="close") X
+    form(id="postForm")
+      div(class="form")
+        label(class="formLabel")='Bota seu texto aqui'
+        textarea(rows="3" id="formText")
+      div(class="form")
+        label(class="formLabel")='Duração: '
+          #formTTLtext
+        input(type="range" id="formTTL" step="1" min="0" max="9" value="0" oninput="showVal(this.value)")
+      div(class="form")
+        label(class="formLabel")='Imagem?'
+        input(type="file" id="formImage" accept="image/*" capture="camera")
+      button(id="submitButton" onclick="submitForm()") Postar
+        

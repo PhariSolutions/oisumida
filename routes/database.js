@@ -13,44 +13,34 @@ db.on('error', function () {
 
 dataInterface = {};
 db.once('open', function () {
-
+    console.log("Connected to database!");
 });
-dataInterface.insert = function (post) {
-    var result = 2;
-    entry = new Post(post);
-    entry.save(function (err, saved) {
+dataInterface.insert = function (post, callback) {
+    var entry = new Post(post);
+    entry.save(function (err) {
         if (err) {
-            result.success = false;
-            return;
-        };
-        result.success = true;
-        result.data = saved;
-    });
-    return result;
+            console.log(err);
+        }
+    }).then(callback(entry));
 }
 
-dataInterface.getAll = function (coords) {
-    var result;
+/** 
+ * Recebe as coordenadas e executa o callback com o resultado da query como argumento
+ */
+dataInterface.getAll = function (coords, callback) {
     Post.where('location').near({ center: coords, maxDistance: 400, spherical: true }).select('_id text location expire').exec(function (err, posts) {
         if (err) {
-            result.success = false;
             return handleError(err);
         }
-        result.success = true;
-        result.data = posts;
+        callback(posts);
     });
-    return result;
 }
 
-dataInterface.getImage = function (id) {
-    var result;
+dataInterface.getImage = function (id, callback) {
     Post.findById(id).select('image').exec(function (err, post) {
         if (err) {
-            result.success = false;
             return handleError(err);
         }
-        result.success = true;
-        result.data = post.image;
+        callback(post.image);
     });
-    return result;
 }

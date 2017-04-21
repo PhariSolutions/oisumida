@@ -1,8 +1,13 @@
 extends layout
 
 block content
+  script.
+    alert("Clique na direita para postar, esquerda para tela cheia!")
   #navbar
-    h1= title
-    img(src="/images/logo.png" id="logo")
+    a(id="title" onclick="fullscreen()")
+      h1= title
+    a(href="#modalsubmit" id="logo")
+      img(src="/images/logo.png")
   #mapid
+  include postform.pug
   footer Made with daw, by Asantos07

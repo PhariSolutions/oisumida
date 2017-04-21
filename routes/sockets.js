@@ -7,40 +7,40 @@ io.on('connection', function (socket) {
     let conn = {};
     socket.on("handshake", function (loc) {
         pos = [loc.lat, loc.lng];
-        result = dataInterface.getAll(pos);
-        if (result.success) {
-            socket.emit('welcome', result.data);
+        console.log("Nova conexão! at " + pos);
+        dataInterface.getAll(pos, function (data) {
+            socket.emit('welcome', data);
             conn = { id: socket.id, lastloc: pos };
             concon.push(conn);
-        }
+        });
     });
     socket.on('new', function (data) {
+        let ref = [1, 15, 30, 60, 120, 240, 480, 720, 1440, 2880];
+        var actualTTL = ref[data.ttl] * 60 * 1000;
         newPost = {
             text: data.text,
-            image: b64image in data ? Buffer.from(data.b64image, 'base64') : null,
+            image: data.b64image ? Buffer.from(data.b64image, 'base64') : null,
             location: {
                 coordinates: [data.loc.lat, data.loc.lng]
             },
-            expire: new Date((data.ttl * 1000) + new Date())
+            expire: new Date(actualTTL + new Date().getTime())
         }
-        result = dataInterface.insert(newPost);
-        if (result.success) {
-            for (usr in concon) {
-                p1 = usr.lastloc;
-                p2 = result.data.location.coordinates;
+        dataInterface.insert(newPost, function (data) {
+            for (var i=0; i < concon.length; i++) {
+                p1 = concon[i].lastloc;
+                p2 = data.location.coordinates;
                 var d = Math.hypot(p1[0] - p2[0], p1[1] - p2[1]);
                 if (d <= 400) {
-                    io.sockets.connected[usr.id].emit('new', result.data);
+                    io.sockets.connected[concon[i].id].emit('new', data);
                 }
             }
-        }
+        });
     });
     socket.on('update', function (loc) {
         pos = [loc.lat, loc.lng];
-        result = dataInterface.getAll(pos);
-        if (result.success) {
-            socket.emit('update', result.data);
-        }
+        result = dataInterface.getAll(pos, function (data) {
+            socket.emit('update', data);
+        });
     });
     socket.on('disconnect', function () {
         i = concon.indexOf(conn);
