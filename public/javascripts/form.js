@@ -15,6 +15,7 @@ function submitForm() {
     if (file) {
         var reader = new FileReader();
         reader.addEventListener("load", function () {
+            console.log(reader.result);
             post.b64image = reader.result;
             sendNew(post);
             document.getElementById("postForm").reset();

@@ -4,7 +4,7 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
+map.dragging.disable();
 var defaultIcon = L.icon({
     iconUrl: '/images/marker.png',
     iconSize: [50, 75], // size of the icon
@@ -23,10 +23,9 @@ let myMarker = L.marker([0, 0], { icon: userLocationIcon });
 myMarker.setZIndexOffset(9000);
 markers.addTo(map);
 myMarker.addTo(map);
-let myLoc;
+let myLoc = [];
 
-function fullscreen() {
-    let element = document.documentElement;
+function fullscreen(element = document.documentElement) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

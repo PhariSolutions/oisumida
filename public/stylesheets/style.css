@@ -131,7 +131,19 @@ button {
 .leaflet-popup-content {
   font-size: 16px; }
   .leaflet-popup-content > p {
+    text-align: center;
     font-size: 20px;
-    font-weight: bolder; }
+    font-weight: bolder;
+    margin-bottom: 0.2em; }
+  .leaflet-popup-content div > img {
+    height: inherit;
+    width: auto;
+    vertical-align: middle; }
+  .leaflet-popup-content > div {
+    height: 5em;
+    width: auto;
+    max-width: 100%;
+    display: inline-block;
+    margin: auto; }
 
 /*# sourceMappingURL=style.css.map */

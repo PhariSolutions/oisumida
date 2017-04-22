@@ -19,13 +19,21 @@ io.on('connection', function (socket) {
         var actualTTL = ref[data.ttl] * 60 * 1000;
         newPost = {
             text: data.text,
-            image: data.b64image ? Buffer.from(data.b64image, 'base64') : null,
             location: {
                 coordinates: [data.loc.lat, data.loc.lng]
             },
             expire: new Date(actualTTL + new Date().getTime())
+        };
+        var image = null;
+        if (data.b64image) {
+            image = {};
+            regex = /image\/(\w+)/;
+            image.ext = '.' + regex.exec(data.b64image)[1];
+            console.log(regex.exec(data.b64image));
+            image.data = Buffer.from(data.b64image.replace(/.+base64,/, ''), 'base64');
         }
-        dataInterface.insert(newPost, function (data) {
+        dataInterface.insert(newPost, image, function (data) {
+            console.log("FOI OK")
             for (var i=0; i < concon.length; i++) {
                 p1 = concon[i].lastloc;
                 p2 = data.location.coordinates;

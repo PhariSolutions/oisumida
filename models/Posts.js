@@ -5,7 +5,7 @@
 module.exports = function (mongoose) {
     var postSchema = mongoose.Schema({
         text: String,
-        image: { type: Buffer, default: null },
+        image: { type: String, default: null },
         location: {
             'type': { type: String, enum: "Point", default: "Point" },
             coordinates: { type: [Number], default: [0, 0] }
