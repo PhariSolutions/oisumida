@@ -16,7 +16,7 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '42');
 app.set('port', port);
 
 /**
@@ -36,14 +36,9 @@ MODULES.io = require('socket.io').listen(server);
 require('../routes/sockets');
 
 /**
- * Route for retrieving images
- */
-require('../routes/getImage');
-
-/**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port);
+server.listen(port, '2a02:4780:1:1::1:8528');
 server.on('error', onError);
 server.on('listening', onListening);
 
