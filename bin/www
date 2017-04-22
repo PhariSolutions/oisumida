@@ -38,7 +38,7 @@ require('../routes/sockets');
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, '2a02:4780:1:1::1:8528');
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
