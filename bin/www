@@ -12,8 +12,8 @@ MODULES = {};
 app = require('../app');
 var debug = require('debug')('oisumida:server');
 var https = require('https');
-const fs = require('fs');
-const path = require('path');
+fs = require('fs');
+path = require('path');
 
 /**
  * Get port from environment and store in Express.
