@@ -22,14 +22,13 @@ function updateLocal(data) {
         var newmarkers = new L.LayerGroup();
         for (var i = 0; i < data.length; i++) {
             var marker = L.marker(data[i].location.coordinates, { icon: defaultIcon }).addTo(newmarkers);
-            marker.bindPopup("<p>" + data[i].text + '</p><div onclick="fullscreen(this)"><img src=' + data[i].image + "></div><footer>" + data[i].expire.toString() + "</footer>", { closeOnClick: false, keepInView: true });
+            var img = '<img src="' + data[i].image + '">';
+            var footer = '<footer>' + data[i].expire + '</footer>';
+            marker.bindPopup("<p>" + data[i].text + '</p><div onclick="fullscreen(this)">' + img + "</div>" + footer, { closeOnClick: false, keepInView: true });
         }
         newmarkers.addTo(map);
         map.removeLayer(markers);
         markers = newmarkers;
-    } else {
-        var marker = L.marker(data.location.coordinates, { icon: defaultIcon }).addTo(markers);
-        marker.bindPopup("<p>" + data.text + '</p><div><img src=' + data.image + "></div><footer>" + data.expire.toString() + "</footer>", { closeOnClick: false, keepInView: true });
     }
 }
 
