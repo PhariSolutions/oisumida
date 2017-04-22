@@ -22,7 +22,7 @@ function updateLocal(data) {
         var newmarkers = new L.LayerGroup();
         for (var i = 0; i < data.length; i++) {
             var marker = L.marker(data[i].location.coordinates, { icon: defaultIcon }).addTo(newmarkers);
-            var img = '<img src="' + data[i].image + '">';
+            var img = data[i].image ? '<img src="' + data[i].image + '">' : '';
             var footer = '<footer>' + data[i].expire + '</footer>';
             marker.bindPopup("<p>" + data[i].text + '</p><div onclick="fullscreen(this)">' + img + "</div>" + footer, { closeOnClick: false, keepInView: true });
         }
