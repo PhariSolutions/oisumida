@@ -24,7 +24,7 @@ function updateLocal(data) {
             var marker = L.marker(data[i].location.coordinates, { icon: defaultIcon }).addTo(newmarkers);
             var img = data[i].image ? '<img src="' + data[i].image + '">' : '';
             var footer = '<footer>' + data[i].expire + '</footer>';
-            marker.bindPopup("<p>" + data[i].text + '</p><div onclick="fullscreen(this)">' + img + "</div>" + footer, { closeOnClick: false, keepInView: true });
+            marker.bindPopup("<p>" + data[i].text + '</p><div onclick="fullscreen(this)">' + img + "</div>" + footer, { closeOnClick: false });
         }
         newmarkers.addTo(map);
         map.removeLayer(markers);
