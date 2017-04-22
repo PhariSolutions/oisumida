@@ -2,8 +2,6 @@
 * Setup do mongoose, e já incluo tbm o modelo de Post
 */
 let mongoose = require('mongoose');
-const fs = require('fs');
-const path = require('path');
 
 Post = require('../models/Posts')(mongoose);
 
